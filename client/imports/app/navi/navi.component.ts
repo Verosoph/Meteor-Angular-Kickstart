@@ -30,6 +30,5 @@ export class NaviComponent implements OnInit {
 
     navigateTo(link: string) {
         this.router.navigate(['/'+link]);
-        console.log("Navigate to");
     }
 }
