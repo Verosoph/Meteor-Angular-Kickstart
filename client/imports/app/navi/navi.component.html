@@ -2,7 +2,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item" *ngFor="let entry of naviEntries">
-                <a class="nav-link" href="{{entry.link}}">{{entry.name}}</a>
+                <button class="btn btn-link nav-link" href="" (click)="navigateTo(entry.link)">{{entry.name}}</button>
             </li>
         </ul>
         <span class="navbar-text">

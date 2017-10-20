@@ -23,12 +23,13 @@ export class NaviComponent implements OnInit {
         /*
          * Push Items to the Navigation
          */
-        this.naviEntries.push({name: 'Home', link: '#'});
-        this.naviEntries.push({name: 'test', link: '#'});
-        this.naviEntries.push({name: 'test2', link: '#'});
+        this.naviEntries.push({name: 'Home', link: ''});
+        this.naviEntries.push({name: 'test', link: ''});
+        this.naviEntries.push({name: 'test2', link: ''});
     }
 
     navigateTo(link: string) {
         this.router.navigate(['/'+link]);
+        console.log("Navigate to");
     }
 }
