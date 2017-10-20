@@ -17,15 +17,14 @@ export class NaviComponent implements OnInit {
 
     constructor(
         private router: Router
-    ) { }
+    ) {}
 
     ngOnInit() {
         /*
          * Push Items to the Navigation
          */
         this.naviEntries.push({name: 'Home', link: ''});
-        this.naviEntries.push({name: 'test', link: ''});
-        this.naviEntries.push({name: 'test2', link: ''});
+        this.naviEntries.push({name: 'Board', link: 'board'});
     }
 
     navigateTo(link: string) {
