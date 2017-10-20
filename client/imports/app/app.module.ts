@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { RouterModule } from '@angular/router';
 
-import { routes } from './app.routes';
+import { routes, ROUTES_PROVIDERS } from './app.routes';
 import { AppComponent } from './app.component';
 
 import { NaviComponent } from './navi/navi.component';
@@ -19,6 +19,7 @@ import { BoardComponent } from './board/board.component';
     ],
     // Providers
     providers: [
+        ...ROUTES_PROVIDERS
     ],
     // Modules
     imports: [

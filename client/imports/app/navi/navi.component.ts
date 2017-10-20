@@ -24,7 +24,7 @@ export class NaviComponent implements OnInit {
          * Push Items to the Navigation
          */
         this.naviEntries.push({name: 'Home', link: ''});
-        this.naviEntries.push({name: 'Board', link: 'board'});
+        if(Meteor.userId()) this.naviEntries.push({name: 'Board', link: 'board'});
     }
 
     navigateTo(link: string) {
