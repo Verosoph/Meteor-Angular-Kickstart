@@ -18,7 +18,7 @@ export class LoggedinComponent implements OnInit {
 
     }
 
-    static logout(): void {
+    logout() {
         Meteor.logout();
     }
 
