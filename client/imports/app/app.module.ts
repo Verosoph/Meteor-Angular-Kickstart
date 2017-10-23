@@ -9,8 +9,9 @@ import { AppComponent } from './app.component';
 import { NaviComponent } from './navi/navi.component';
 import { HomeComponent } from './home/home.component';
 import { BoardComponent } from './board/board.component';
-import { LOGIN_DECLARATIONS } from './login/login.export';
 import { RegisterComponent } from './register/register.component';
+import { LOGIN_DECLARATIONS } from './login/login.export';
+import { ROOM_DECLARATIONS } from './room/room.export';
 
 @NgModule({
     // Components, Pipes, Directive
@@ -20,6 +21,7 @@ import { RegisterComponent } from './register/register.component';
         HomeComponent,
         BoardComponent,
         ...LOGIN_DECLARATIONS,
+        ...ROOM_DECLARATIONS,
         RegisterComponent
     ],
     // Providers

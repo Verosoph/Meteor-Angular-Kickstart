@@ -31,7 +31,10 @@ export class NaviComponent implements OnInit {
             this.naviEntries = [];
             this.naviEntries.push({name: 'Home', link: ''});
 
-            if(Meteor.userId()) this.naviEntries.push({name: 'Board', link: 'board'});
+            if(Meteor.userId()) {
+                this.naviEntries.push({name: 'Board', link: 'board'});
+                this.naviEntries.push({name: 'Rooms', link: 'rooms'});
+            }
         });
     }
 
