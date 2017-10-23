@@ -1,0 +1,36 @@
+<div class="row text-center">
+    <div class="col-md-12">
+        <div class="alert alert-danger" *ngIf="regError">
+            {{regMsg}}
+        </div>
+        <form [formGroup]="registerForm">
+            <div class="form-group">
+                <label class="center-block">
+                    Username:
+                    <input class="form-control" formControlName="username">
+                </label>
+            </div>
+            <div class="form-group">
+                <label class="center-block">
+                    Password:
+                    <input class="form-control" type="password" formControlName="password">
+                </label>
+            </div>
+            <div class="form-group">
+                <label class="center-block">
+                    Password repeat:
+                    <input class="form-control" type="password" formControlName="passwordRepeat">
+                </label>
+            </div>
+            <div class="form-group">
+                <label class="center-block">
+                    Email:
+                    <input class="form-control" formControlName="email">
+                </label>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary" (click)="register()">Registrieren</button>
+            </div>
+        </form>
+    </div>
+</div>

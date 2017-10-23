@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators, FormControl } from "@angular/forms";
+import { Router } from "@angular/router";
 
 import template from "./login.component.html";
 import style from "./login.scss";
@@ -16,17 +17,12 @@ export class LoginComponent implements OnInit {
     loginForm: FormGroup;
 
     constructor(
+        private router: Router,
         private formBuilder: FormBuilder
     ){}
 
     ngOnInit() {
         this.userId = Meteor.userId();
-        if(this.userId) {
-            console.log("Logged In");
-        }
-        else {
-            console.log("not logged");
-        }
 
         this.loginForm = this.formBuilder.group({
             username: new FormControl('', Validators.compose([
@@ -51,5 +47,9 @@ export class LoginComponent implements OnInit {
                     }
                 })
             }
+    }
+
+    toRegister(): void {
+            this.router.navigate(['register']);
     }
 }

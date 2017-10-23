@@ -3,9 +3,11 @@ import { Meteor } from 'meteor/meteor';
 
 import { HomeComponent } from "./home/home.component";
 import { BoardComponent } from "./board/board.component";
+import { RegisterComponent } from "./register/register.component";
 
 export const routes: Route[] = [
     { path: '', component: HomeComponent},
+    { path: 'register', component: RegisterComponent },
     { path: 'board', component: BoardComponent, canActivate: ['canActivateForLoggedIn']},
     { path: 'board2', component: BoardComponent}
 ];

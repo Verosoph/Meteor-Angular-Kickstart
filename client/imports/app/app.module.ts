@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { routes, ROUTES_PROVIDERS } from './app.routes';
 import { AppComponent } from './app.component';
@@ -8,6 +9,8 @@ import { AppComponent } from './app.component';
 import { NaviComponent } from './navi/navi.component';
 import { HomeComponent } from './home/home.component';
 import { BoardComponent } from './board/board.component';
+import { LOGIN_DECLARATIONS } from './login/login.export';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
     // Components, Pipes, Directive
@@ -15,7 +18,9 @@ import { BoardComponent } from './board/board.component';
         AppComponent,
         NaviComponent,
         HomeComponent,
-        BoardComponent
+        BoardComponent,
+        ...LOGIN_DECLARATIONS,
+        RegisterComponent
     ],
     // Providers
     providers: [
@@ -24,6 +29,8 @@ import { BoardComponent } from './board/board.component';
     // Modules
     imports: [
         BrowserModule,
+        FormsModule,
+        ReactiveFormsModule,
         RouterModule.forRoot(routes)
     ],
     // Main Component

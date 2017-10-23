@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { MeteorObservable } from "meteor-rxjs";
 
 import style from './navi.scss';
 import template  from './navi.component.html';
@@ -13,7 +14,8 @@ import { NaviEntry } from '../../../../both/models/navi.model';
 
 export class NaviComponent implements OnInit {
 
-    naviEntries: NaviEntry[] = [];
+    naviEntries: NaviEntry[];
+    loggedIn:boolean = false;
 
     constructor(
         private router: Router
@@ -23,8 +25,14 @@ export class NaviComponent implements OnInit {
         /*
          * Push Items to the Navigation
          */
-        this.naviEntries.push({name: 'Home', link: ''});
-        if(Meteor.userId()) this.naviEntries.push({name: 'Board', link: 'board'});
+        MeteorObservable.autorun().subscribe(() => {
+            this.loggedIn = !!Meteor.userId();
+
+            this.naviEntries = [];
+            this.naviEntries.push({name: 'Home', link: ''});
+
+            if(Meteor.userId()) this.naviEntries.push({name: 'Board', link: 'board'});
+        });
     }
 
     navigateTo(link: string) {
