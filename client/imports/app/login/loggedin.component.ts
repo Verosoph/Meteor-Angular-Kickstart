@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 
 import template from "./loggedin.component.html";
 import style from "./login.scss";
@@ -12,7 +13,9 @@ import style from "./login.scss";
 
 export class LoggedinComponent implements OnInit {
 
-    constructor() { }
+    constructor(
+        private router: Router
+    ) { }
 
     ngOnInit() {
 
@@ -20,6 +23,7 @@ export class LoggedinComponent implements OnInit {
 
     logout() {
         Meteor.logout();
+        this.router.navigate(['']);
     }
 
 }
