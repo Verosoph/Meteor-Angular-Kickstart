@@ -18,5 +18,14 @@ Meteor.methods({
                 return false
             }
         }
+    },
+
+    updateRoom: function (roomObj: Room) {
+        check(roomObj, Object);
+
+        if(Meteor.isServer) {
+            Rooms.collection.update({_id: roomObj._id}, roomObj);
+            return true
+        }
     }
 })

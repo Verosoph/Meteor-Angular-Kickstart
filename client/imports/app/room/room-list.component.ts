@@ -35,4 +35,8 @@ export class RoomListComponent implements OnInit {
     addRoom(): void {
         this.router.navigate(['room/add']);
     }
+
+    editRoom(roomId: string): void {
+        this.router.navigate(['room/edit/', roomId]);
+    }
 }
