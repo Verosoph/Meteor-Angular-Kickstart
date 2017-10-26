@@ -7,7 +7,7 @@ import { MeteorObservable } from "meteor-rxjs";
 import { Room } from "../../../../both/models/room.model";
 import { Rooms } from "../../../../both/collections/room.collection";
 
-import template from './roomlist.component.html';
+import template from './room-list.component.html';
 import style from './room.scss';
 
 @Component({
@@ -30,5 +30,9 @@ export class RoomListComponent implements OnInit {
         this.roomSub = MeteorObservable.subscribe("rooms").subscribe(() => {
             this.rooms = Rooms.find({}).zone();
         })
+    }
+
+    addRoom(): void {
+        this.router.navigate(['room/add']);
     }
 }

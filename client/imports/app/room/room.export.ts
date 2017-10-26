@@ -1,5 +1,7 @@
-import { RoomListComponent } from './roomlist.component';
+import { RoomListComponent } from './room-list.component';
+import { RoomAddComponent } from './room-add.component';
 
 export const ROOM_DECLARATIONS = [
-    RoomListComponent
+    RoomListComponent,
+    RoomAddComponent
 ];
