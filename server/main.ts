@@ -1,3 +1,9 @@
 import { Meteor } from 'meteor/meteor';
 
-Meteor.startup(() => {});
+import { loadRooms } from './imports/dummydata/rooms.dummydata';
+
+import './imports/publications/rooms.publication';
+
+Meteor.startup(() => {
+    loadRooms();
+});

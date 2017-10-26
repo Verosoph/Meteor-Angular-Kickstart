@@ -1,0 +1,15 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item" *ngFor="let entry of naviEntries">
+                <button class="btn btn-link nav-link" href="" (click)="navigateTo(entry.link)">{{entry.name}}</button>
+            </li>
+        </ul>
+        <span class="navbar-text" *ngIf="!loggedIn">
+            <login></login>
+        </span>
+        <span class="navbar-text" *ngIf="loggedIn">
+            <loggedin></loggedin>
+        </span>
+    </div>
+</nav>
