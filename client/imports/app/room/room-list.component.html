@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-center">
     <div class="roombox" *ngFor="let room of rooms | async">
         <div class="picture text-center"><img src="{{room.imgurl}}" height="145"></div>
-        <div class="name text-center">{{room.name}}</div>
+        <div class="name text-center"><h4>{{room.name}}</h4></div>
         <div class="actions text-center">
             <button class="btn btn-primary" (click)="editRoom(room._id)">Edit</button>
         </div>
