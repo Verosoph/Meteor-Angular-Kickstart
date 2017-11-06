@@ -27,5 +27,42 @@ Meteor.methods({
             Rooms.collection.update({_id: roomObj._id}, roomObj);
             return true
         }
+    },
+
+    joinRoom: function (roomObj: Room, userId: string) {
+        check(roomObj, Object);
+
+        if(Meteor.isServer) {
+
+            console.log("Join Room");
+
+            var mate = {
+                userId: userId,
+                joinedAt: new Date()
+            }
+
+            let room: Room = Rooms.collection.findOne(roomObj._id);
+            if(typeof room.roommates === typeof undefined) {
+                console.log("empty");
+                room.roommates = [mate];
+                console.log(room);
+            }
+            else {
+                console.log("not empty");
+                room.roommates.push(mate);
+            }
+
+            Rooms.collection.update({_id: roomObj._id}, room);
+
+            Meteor.users.update({_id: userId}, {
+                $set: {
+                    room: {
+                        roomId: roomObj._id,
+                        joinedAt: new Date()
+                    }
+                }
+            });
+        }
     }
+
 })
