@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import * as _ from "lodash";
 
 import { Room } from '../models/room.model';
 import { Rooms } from '../collections/room.collection';
@@ -45,7 +46,6 @@ Meteor.methods({
             if(typeof room.roommates === typeof undefined) {
                 console.log("empty");
                 room.roommates = [mate];
-                console.log(room);
             }
             else {
                 console.log("not empty");
@@ -60,6 +60,30 @@ Meteor.methods({
                         roomId: roomObj._id,
                         joinedAt: new Date()
                     }
+                }
+            });
+        }
+    },
+
+    leaveRoom: function(roomObj: Room, userId: string ) {
+        check(roomObj, Object);
+        check(userId, String);
+
+        if(Meteor.isServer) {
+
+            console.log("leave room");
+            let room: Room = Rooms.collection.findOne(roomObj._id);
+
+            let index = _.findIndex(room.roommates, function (room) {
+                return room.userId == userId;
+            });
+
+            room.roommates.splice(index,1);
+
+            Rooms.collection.update({_id: roomObj._id}, room);
+            Meteor.users.update({_id: userId}, {
+                $unset: {
+                    room: ""
                 }
             });
         }

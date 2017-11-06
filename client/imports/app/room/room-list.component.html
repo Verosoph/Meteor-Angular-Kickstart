@@ -5,7 +5,7 @@
         <div class="actions text-center">
             <button *ngIf="allowEdit(room.owner)" class="btn btn-primary" (click)="editRoom(room._id)">Edit</button>
             <button *ngIf="!hasRoom" class="btn btn-success" (click)="joinRoom(room)">Join</button>
-            <button *ngIf="userInRoom(room)" class="btn btn-danger">Leave</button>
+            <button *ngIf="userInRoom(room)" class="btn btn-danger" (click)="leaveRoom(room)">Leave</button>
         </div>
     </div>
 </div>

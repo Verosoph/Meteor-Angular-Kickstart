@@ -75,8 +75,14 @@ export class RoomListComponent implements OnInit {
     userInRoom(roomObj: Room): boolean {
         Meteor.subscribe("userdata");
         var user: User = Meteor.users.findOne(this.userId);
-        if(user.room.roomId == roomObj._id) return true
+        if(user.room){
+            if(user.room.roomId == roomObj._id) return true
+        }
 
         return false
+    }
+
+    leaveRoom(roomObj: Room): void {
+        Meteor.call('leaveRoom', roomObj, Meteor.userId());
     }
 }
