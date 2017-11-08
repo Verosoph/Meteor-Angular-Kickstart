@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { MeteorObservable } from "meteor-rxjs";
 import { Roles } from 'meteor/alanning:roles';
 
-
 import { User } from "../../../../both/models/user.model";
 import { Room } from "../../../../both/models/room.model";
 import { Rooms } from "../../../../both/collections/room.collection";
@@ -27,6 +26,8 @@ export class RoomListComponent implements OnInit {
     user: User;
     hasRoom: boolean;
     userSub: Subscription;
+    error: boolean;
+    errorMsg: string;
 
     constructor(
         private zone: NgZone,
@@ -39,6 +40,8 @@ export class RoomListComponent implements OnInit {
         this.userSub = MeteorObservable.subscribe("userdata", this.userId).subscribe(() => {
             Tracker.autorun(() => {
                 this.zone.run(() => {
+                    this.error = false;
+                    this.errorMsg = '';
                     this.hasRoom = false;
                     this.user = Meteor.users.findOne(this.userId);
 
@@ -61,7 +64,18 @@ export class RoomListComponent implements OnInit {
     }
 
     joinRoom(roomObj: Room): void {
-        Meteor.call('joinRoom', roomObj, this.userId);
+            if(window.prompt('Password: ') == roomObj.password) {
+                Meteor.call('joinRoom', roomObj, this.userId);
+            }
+            else {
+                this.error = true;
+                this.errorMsg = 'Wrong password!';
+
+                setTimeout(() => {
+                    this.error = false;
+                    this.errorMsg = '';
+                }, 2000);
+            }
     }
 
     allowEdit(roomOwner: string): boolean {
