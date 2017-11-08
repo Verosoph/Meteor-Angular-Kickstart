@@ -2,13 +2,13 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item" *ngFor="let entry of naviEntries">
-                <button class="btn btn-link nav-link" href="" (click)="navigateTo(entry.link)">{{entry.name}}</button>
+                <button *ngIf="allowItem(entry.role)" class="btn btn-link nav-link" href="" (click)="navigateTo(entry.link)">{{entry.name}}</button>
             </li>
         </ul>
-        <span class="navbar-text" *ngIf="!loggedIn">
+        <span class="navbar-text" *ngIf="!user">
             <login></login>
         </span>
-        <span class="navbar-text" *ngIf="loggedIn">
+        <span class="navbar-text" *ngIf="user">
             <loggedin></loggedin>
         </span>
     </div>
