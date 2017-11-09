@@ -11,10 +11,12 @@ import { NaviEntry } from '../../../../both/models/navi.model';
 @Component({
     selector: 'navi',
     template,
-    styles: [style]
+    styles: [style],
 })
 
 export class NaviComponent implements OnInit {
+
+    toggleNav: boolean = false;
 
     naviEntries: NaviEntry[];
     visitor: boolean = true;
@@ -56,5 +58,9 @@ export class NaviComponent implements OnInit {
 
     navigateTo(link: string) {
         this.router.navigate(['/'+link]);
+    }
+
+    toggleNavbar() {
+        this.toggleNav = !this.toggleNav;
     }
 }
