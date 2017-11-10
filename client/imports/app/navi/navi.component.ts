@@ -11,7 +11,7 @@ import { NaviEntry } from '../../../../both/models/navi.model';
 @Component({
     selector: 'navi',
     template,
-    styles: [style],
+    styles: [style]
 })
 
 export class NaviComponent implements OnInit {

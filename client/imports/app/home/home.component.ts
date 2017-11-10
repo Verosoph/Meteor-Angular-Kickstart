@@ -1,5 +1,9 @@
-import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
+import { Component, NgZone, OnInit } from "@angular/core";
+import { Subscription } from 'rxjs/Subscription';
+import { Meteor } from 'meteor/meteor';
+import { MeteorObservable } from "meteor-rxjs";
+
+import { User } from '../../../../both/models/user.model';
 
 import style from './home.scss';
 import template  from './home.component.html';
@@ -12,7 +16,42 @@ import template  from './home.component.html';
 
 export class HomeComponent implements OnInit {
 
-    constructor() {}
+    loadUser: boolean;
+    hasRoom: boolean;
+    loggedIn: boolean;
 
-    ngOnInit() {}
+    userSub: Subscription;
+    userId: string;
+    user: User;
+
+    constructor(
+        private zone: NgZone
+    ) {}
+
+    ngOnInit() {
+
+        this.loggedIn = false;
+        this.userId = Meteor.userId();
+
+        if(this.userId) {
+            this.loggedIn = true;
+
+            this.userSub = MeteorObservable.subscribe("userdata", this.userId).subscribe(() => {
+                Tracker.autorun(() => {
+                    this.zone.run(() => {
+
+                        this.loadUser = false;
+                        this.hasRoom = false;
+
+                        this.user = Meteor.users.findOne(this.userId);
+                        if (typeof this.user !== typeof undefined) {
+
+
+                        }
+                    });
+                });
+            });
+        }
+
+    }
 }
