@@ -102,9 +102,9 @@ export class BoardComponent implements OnInit {
                             let entriesFGs = []
                             this.userBoard.entries.forEach(entry => {
                                 entriesFGs.push(this.fb.group({
-                                    content: entry.content,
                                     createdAt: entry.createdAt,
-                                    public: entry.public
+                                    public: entry.public,
+                                    content: entry.content
                                 }));
                             });
 
