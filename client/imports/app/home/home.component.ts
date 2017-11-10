@@ -4,6 +4,8 @@ import { Meteor } from 'meteor/meteor';
 import { MeteorObservable } from "meteor-rxjs";
 
 import { User } from '../../../../both/models/user.model';
+import { Room } from "../../../../both/models/room.model";
+import { Rooms } from "../../../../both/collections/room.collection";
 
 import style from './home.scss';
 import template  from './home.component.html';
@@ -21,8 +23,10 @@ export class HomeComponent implements OnInit {
     loggedIn: boolean;
 
     userSub: Subscription;
+    roomSub: Subscription;
     userId: string;
     user: User;
+    room: Room;
 
     constructor(
         private zone: NgZone
@@ -46,7 +50,19 @@ export class HomeComponent implements OnInit {
                         this.user = Meteor.users.findOne(this.userId);
                         if (typeof this.user !== typeof undefined) {
 
+                            if (this.user.room) {
+                                this.roomSub = MeteorObservable.subscribe("rooms").subscribe(() => {
+                                    Tracker.autorun(() => {
+                                        this.zone.run(() => {
+                                            this.room = Rooms.findOne({_id: this.user.room.roomId});
 
+                                            if(typeof this.room !== typeof undefined) {
+                                                this.hasRoom = true;
+                                            }
+                                        });
+                                    });
+                                });
+                            }
                         }
                     });
                 });

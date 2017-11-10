@@ -70,7 +70,6 @@ export class BoardComponent implements OnInit {
 
                             this.loadUser = true;
 
-
                             if (this.user.room) {
                                 this.roomSub = MeteorObservable.subscribe("rooms").subscribe(() => {
                                     Tracker.autorun(() => {
