@@ -127,3 +127,15 @@ declare namespace Chai {
     always: SpyCalledAlways;
   }
 }
+
+declare module "meteor/alanning:roles" {
+  export module Roles {
+    function createRole(roleName: string): string;
+    function deleteRole(roleName: string): void;
+    function addUsersToRoles(users: any, roles: any, groups?: string): void;
+    function removeUsersFromRoles(users: any, roles: any): void;
+    function userIsInRole(user: any, roles: any): boolean;  //user can be user ID or user object
+    function getRolesForUser(userId: string): string[];
+    var GLOBAL_GROUP: string;
+  }
+}

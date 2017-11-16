@@ -6,6 +6,7 @@ export interface Room extends CollectionObject {
     imgurl?: string
     createdAt: Date,
     editedAt: Date,
+    owner: string,
     roommates?: [Mate]
 }
 

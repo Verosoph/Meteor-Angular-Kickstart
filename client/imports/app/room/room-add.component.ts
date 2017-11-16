@@ -53,7 +53,8 @@ export class RoomAddComponent implements OnInit {
             password: this.addRoomForm.value.password,
             imgurl: this.addRoomForm.value.imgURL,
             createdAt: new Date(),
-            editedAt: new Date()
+            editedAt: new Date(),
+            owner: Meteor.userId()
         }
         if(this.addRoomForm.valid) {
             MeteorObservable.call('addRoom', this.room).subscribe((data) => {
