@@ -63,11 +63,11 @@ export class RegisterComponent implements OnInit {
                     email: email,
                     username: username,
                     password: password
-                }), function (error) {
+                }, function (error) {
                     if ( error ) {
                         console.log("error");
                     }
-                }
+                });
             }
             else {
                 this.regError = true;
