@@ -2,7 +2,7 @@ import { Roles } from 'meteor/alanning:roles';
 
 export function setAdmin() {
 
-    if(Accounts.findUserByUsername('admin') == null) {
+    if(Accounts.findUserByUsername('jow') == null) {
         // Create Admin Account
 
         var id = Accounts.createUser({
