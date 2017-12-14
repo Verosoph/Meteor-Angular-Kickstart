@@ -1,4 +1,4 @@
-import { Component, NgZone, OnInit } from "@angular/core";
+import { Component, NgZone, OnInit, Output, EventEmitter } from "@angular/core";
 import { Subscription } from 'rxjs/Subscription';
 import { Meteor } from 'meteor/meteor';
 import { MeteorObservable } from "meteor-rxjs";
@@ -6,6 +6,8 @@ import { MeteorObservable } from "meteor-rxjs";
 import { User } from '../../../../both/models/user.model';
 import style from './home.scss';
 import template  from './home.component.html';
+
+import { AlertService } from '../services/alert.service';
 
 @Component({
     selector: 'home',
@@ -24,11 +26,17 @@ export class HomeComponent implements OnInit {
     user: User;
     usernames: Object;
 
+    alertMsg: string;
+
+
     constructor(
-        private zone: NgZone
+        private zone: NgZone,
+        private alert: AlertService
     ) {}
 
     ngOnInit() {
+        this.alert.currentMessage.subscribe(message => this.alertMsg = message);
+        this.alert.changeMessage("TEST 123 TEST");
 
         MeteorObservable.autorun().subscribe(() => {
             this.loggedIn = false;
@@ -54,4 +62,5 @@ export class HomeComponent implements OnInit {
             }
         });
     }
+
 }
