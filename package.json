@@ -1,6 +1,5 @@
 {
   "name": "TB.THC",
-  "version": "0.1",
   "private": true,
   "scripts": {
     "start": "meteor run",
