@@ -8,6 +8,7 @@ import style from './home.scss';
 import template  from './home.component.html';
 
 import { AlertService } from '../services/alert.service';
+import { AlertModel } from "../../../../both/models/service.model";
 
 @Component({
     selector: 'home',
@@ -26,7 +27,7 @@ export class HomeComponent implements OnInit {
     user: User;
     usernames: Object;
 
-    alertMsg: string;
+    alertObj: AlertModel;
 
 
     constructor(
@@ -35,9 +36,6 @@ export class HomeComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        this.alert.currentMessage.subscribe(message => this.alertMsg = message);
-        this.alert.changeMessage("TEST 123 TEST");
-
         MeteorObservable.autorun().subscribe(() => {
             this.loggedIn = false;
             this.userId = Meteor.userId();

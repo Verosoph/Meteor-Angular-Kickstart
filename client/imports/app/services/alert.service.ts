@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
+import { AlertModel } from '../../../../both/models/service.model';
+
 @Injectable()
 export class AlertService {
-    private messageSource = new BehaviorSubject<string>("Default");
+    private messageSource = new BehaviorSubject<AlertModel>({msg: "test", type: "info", show: false});
     currentMessage = this.messageSource.asObservable();
 
     constructor() { }
 
-    changeMessage(message: string) {
-        this.messageSource.next(message)
+    createAlert(alert: AlertModel) {
+        this.messageSource.next(alert)
     }
 }

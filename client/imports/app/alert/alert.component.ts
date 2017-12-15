@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, NgZone } from "@angular/core";
 import { Router } from "@angular/router";
 
 import { AlertService } from '../services/alert.service';
+import { AlertModel } from '../../../../both/models/service.model';
 
 import style from './alert.scss';
 import template  from './alert.component.html';
@@ -15,11 +16,31 @@ import template  from './alert.component.html';
 
 export class AlertComponent implements OnInit {
 
-    message: string = "123";
-    constructor(private alert: AlertService) {}
+    showAlert: boolean;
+    alertObj: AlertModel;
+
+    constructor(
+        private zone: NgZone,
+        private alert: AlertService
+    ) {}
 
     ngOnInit() {
-        this.message = "123";
-        this.alert.currentMessage.subscribe(message => this.message = message)
+        this.showAlert = false;
+        this.alert.currentMessage.subscribe(alert => {
+            this.zone.run(() => {
+                this.alertObj = alert;
+                if(this.alertObj.show === true) {
+                    this.toggleAlert();
+                }
+            })
+        })
+    }
+
+    getClass() {
+        return "alert alert-"+this.alertObj.type
+    }
+
+    toggleAlert(){
+        this.showAlert = !this.showAlert;
     }
 }

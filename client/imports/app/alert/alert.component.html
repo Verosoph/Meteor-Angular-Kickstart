@@ -1,5 +1,5 @@
-<div class="messages">
-    <div class="makeItCenter">
-        {{message}}
+<div class="messages" *ngIf="showAlert" (click)="toggleAlert()">
+    <div class="makeItCenter text-center" [ngClass]="getClass()">
+        <span class="align-middle">{{alertObj.msg}}</span>
     </div>
 </div>
