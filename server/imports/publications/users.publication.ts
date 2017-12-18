@@ -7,7 +7,6 @@ interface Options {
 Meteor.publish("userdata", function (userId) {
     return Meteor.users.find(userId, {
         fields: {
-            room: 1
         }
     });
 });

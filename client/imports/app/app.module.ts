@@ -7,26 +7,26 @@ import { routes, ROUTES_PROVIDERS } from './app.routes';
 import { AppComponent } from './app.component';
 
 import { NaviComponent } from './navi/navi.component';
+import { AlertComponent } from './alert/alert.component';
 import { HomeComponent } from './home/home.component';
-import { BoardComponent } from './board/board.component';
 import { RegisterComponent } from './register/register.component';
 import { LOGIN_DECLARATIONS } from './login/login.export';
-import { ROOM_DECLARATIONS } from './room/room.export';
+import { AlertService } from './services/alert.service';
 
 @NgModule({
     // Components, Pipes, Directive
     declarations: [
         AppComponent,
         NaviComponent,
+        AlertComponent,
         HomeComponent,
-        BoardComponent,
         ...LOGIN_DECLARATIONS,
-        ...ROOM_DECLARATIONS,
         RegisterComponent
     ],
     // Providers
     providers: [
-        ...ROUTES_PROVIDERS
+        ...ROUTES_PROVIDERS,
+        AlertService
     ],
     // Modules
     imports: [
