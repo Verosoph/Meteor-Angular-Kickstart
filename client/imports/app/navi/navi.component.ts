@@ -37,6 +37,8 @@ export class NaviComponent implements OnInit {
 
             this.naviEntries = [];
             this.naviEntries.push({name: 'Home', link: '', role: 'visitor'});
+            this.naviEntries.push({name: 'Board', link: 'board', role: 'user'});
+            this.naviEntries.push({name: 'Rooms', link: 'rooms', role: 'user'});
 
         });
     }
