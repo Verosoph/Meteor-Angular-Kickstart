@@ -5,9 +5,6 @@ import { Router } from "@angular/router";
 import template from "./login.component.html";
 import style from "./login.scss";
 
-import { AlertService } from '../services/alert.service';
-import { AlertModel } from "../../../../both/models/service.model";
-
 @Component({
     selector: 'login',
     template,
@@ -18,16 +15,13 @@ export class LoginComponent implements OnInit {
 
     userId: string;
     loginForm: FormGroup;
-    alertObj: AlertModel;
 
     constructor(
         private router: Router,
-        private formBuilder: FormBuilder,
-        private alert: AlertService
+        private formBuilder: FormBuilder
     ){}
 
     ngOnInit() {
-
         this.userId = Meteor.userId();
 
         this.loginForm = this.formBuilder.group({
@@ -38,32 +32,20 @@ export class LoginComponent implements OnInit {
                 Validators.pattern('[A-Za-z]{3}')
             ])),
             password: new FormControl('', Validators.compose([
-                Validators.minLength(6),
                 Validators.required
             ]))
         })
     }
 
-    login() {
+    login(): void {
             let username = this.loginForm.value.username.toLowerCase();
             let password = this.loginForm.value.password;
-
             if(this.loginForm.valid){
-                Meteor.loginWithPassword(username, password, (error) => {
+                Meteor.loginWithPassword(username, password, function(error) {
                     if( error ) {
-                        console.log("1 log");
-                        this.alertObj = {msg: "Username or Password are wrong!", type: "danger", show: true};
-                        this.alert.createAlert(this.alertObj);
-                    }
-                    else {
-                        this.alertObj = {msg: "Logged In", type: "success", show: true};
-                        this.alert.createAlert(this.alertObj);
+                        console.log("login error");
                     }
                 })
-            }
-            else {
-                this.alertObj = {msg: "Login invalid", type: "danger", show: true};
-                this.alert.createAlert(this.alertObj);
             }
     }
 
